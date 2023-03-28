@@ -1,0 +1,15 @@
+[
+  {
+    "author": {
+      "firstName": "I am",
+      "id": "e52552f4-835d-4dbe-ba77-b076e659774d",
+      "imageUrl": "https://freesvg.org/img/1538298822.png",
+      "lastName": "Bot"
+    },
+    "createdAt": 1655648402000,
+    "id": "4e048753-2d60-4144-bc28-9967050aaf12",
+    "status": "seen",
+    "text": "Welcome Welcome I can make logo for you, just tell me the key elements of your concept !!",
+    "type": "text"
+  }
+]
