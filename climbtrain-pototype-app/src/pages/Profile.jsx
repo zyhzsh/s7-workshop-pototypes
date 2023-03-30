@@ -16,7 +16,7 @@ const Profile = ({ user }) => {
 
   const getProfile = async () => {
     const { data, error } = await supabase
-      .from('profiles')
+      .from('demo_profiles')
       .select('*')
       .eq('id', user?.id)
       .single();
@@ -31,7 +31,7 @@ const Profile = ({ user }) => {
       const avatar_url = 'user?.user_metadata?.avatar_url;'
       //Update profile data
       const { data, error } = await supabase
-        .from('profiles')
+        .from('demo_profiles')
         .update({
           username,
           height,
@@ -62,7 +62,7 @@ const Profile = ({ user }) => {
     const weight = e.target.weight.value;
     if (username !== "" || height !== "" || weight !== "") {
       const { data, error } = await supabase
-        .from('profiles')
+        .from('demo_profiles')
         .update({
           username,
           height,
@@ -84,7 +84,7 @@ const Profile = ({ user }) => {
   const updateProfileUrlHandler = async (avatar_url) => {
     console.log(avatar_url);
     const { data, error } = await supabase
-      .from('profiles')
+      .from('demo_profiles')
       .update({
         avatar_url
       })

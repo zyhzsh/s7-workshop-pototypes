@@ -14,7 +14,7 @@ const Challenge = () => {
 
   const getChallenge = async () => {
     const { data, error } = await supabase
-      .from('challenges')
+      .from('demo_challenges')
       .select()
       .eq('id', id)
       .single()

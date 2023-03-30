@@ -8,7 +8,7 @@ const ListRecords = () => {
 
   const getMyRecords = async () => {
     const { data, error } = await supabase
-      .from('records')
+      .from('demo_records')
       .select(`
         *,
         challenges (*),

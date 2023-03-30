@@ -7,7 +7,7 @@ const ListChallenges = () => {
   const [allChallenges, setChallenges] = useState([]);
   const getAllChallenges = async () => {
     let { data, error } = await supabase
-      .from('challenges')
+      .from('demo_challenges')
       .select('*')
     setChallenges(data)
   }

@@ -6,7 +6,7 @@ const ListChallengeCheckPoints = ({ challengeId }) => {
   const [checkpoints, setCheckpoints] = useState([]);
   const getCheckpoints = async () => {
     const { data, error } = await supabase
-      .from('checkpoints')
+      .from('demo_checkpoints')
       .select('*')
       .eq('challenge_id', challengeId)
     setCheckpoints(data)

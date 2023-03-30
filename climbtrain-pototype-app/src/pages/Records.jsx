@@ -12,7 +12,7 @@ const Records = () => {
 
   const getRecord = async () => {
     const { data, error } = await supabase
-      .from('records')
+      .from('demo_records')
       .select()
       .eq('id', recordId)
       .single()
@@ -26,7 +26,7 @@ const Records = () => {
 
   const getCheckpoint = async () => {
     const { data, error } = await supabase
-      .from('checkpoints')
+      .from('demo_checkpoints')
       .select('*')
       .eq('challenge_id', challengeId)
     if (error) {
@@ -39,7 +39,7 @@ const Records = () => {
 
   const getChallenge = async () => {
     const { data, error } = await supabase
-      .from('challenges')
+      .from('demo_challenges')
       .select('*')
       .eq('id', challengeId)
       .single()
