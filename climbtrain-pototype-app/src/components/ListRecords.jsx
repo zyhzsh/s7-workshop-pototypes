@@ -11,9 +11,10 @@ const ListRecords = () => {
       .from('demo_records')
       .select(`
         *,
-        challenges (*),
-        checkpoints (*)`)
-    setRecords(data)
+        demo_challenges (*),
+        demo_checkpoints (*)`)
+    setRecords(data);
+    console.log(data);
   }
 
   useEffect(() => {
