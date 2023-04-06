@@ -39,7 +39,8 @@ const Profile = ({ user }) => {
           avatar_url
         })
         .eq('id', user?.id)
-        .select().single();
+        .select()
+        .single();
       if (error) {
         navigate('/', { replace: true })
       }

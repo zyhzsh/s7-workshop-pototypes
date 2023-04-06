@@ -5,6 +5,8 @@ import Challenge from './pages/Challenge'
 import Home from "./pages/Home"
 import Profile from "./pages/Profile"
 import Records from "./pages/Records"
+import RealTimeTest from "./pages/RealTimeTest"
+
 import { supabase } from "./supabaseClient"
 
 
@@ -28,6 +30,7 @@ const App = () => {
           <Route path="/profile" element={<Profile user={user} />} />
           <Route path="/challenges/:challengeId/records/:recordId" element={<Records />} />
           <Route path="/challenges/:id" element={<Challenge />} />
+          <Route path="/test" element={<RealTimeTest />} />
         </Routes>
       </BrowserRouter>
     </>
