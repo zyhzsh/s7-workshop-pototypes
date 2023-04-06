@@ -30,7 +30,6 @@ const RealTimeTest = () => {
 
     setStatus('Hang');
   }
-
   const userFailedHangTask = async () => {
     const { data, error } = await supabase
       .from('games')
