@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_interactivity_theming/expenses.dart';
 
 void main() {
-  runApp();
+  runApp(const MaterialApp(
+    home: Expenses(),
+  ));
 }
