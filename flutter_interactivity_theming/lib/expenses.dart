@@ -1,5 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_interactivity_theming/widgets/expenses_list/expenses_list.dart';
+import 'package:flutter_interactivity_theming/widgets/new_expense.dart';
+
+import 'models/expense.dart';
 
 class Expenses extends StatefulWidget {
   const Expenses({super.key});
@@ -9,14 +13,77 @@ class Expenses extends StatefulWidget {
 }
 
 class _ExpensesState extends State<Expenses> {
+  final List<Expense> _expenses = [
+    Expense(
+        title: 'Flutter Course',
+        amount: 19.99,
+        date: DateTime.now(),
+        type: ExpenseType.work),
+    Expense(
+        title: 'Cinema',
+        amount: 15.49,
+        date: DateTime.now(),
+        type: ExpenseType.leisure),
+  ];
+
+  void _openAddExpenseOverlay() {
+    showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        builder: (ctx) {
+          return NewExpense(onAddExpense: _addExpense);
+        });
+  }
+
+  void _addExpense(Expense expense) {
+    setState(() {
+      _expenses.add(expense);
+    });
+  }
+
+  void _removeExpense(Expense expense) {
+    final expenseIndex = _expenses.indexOf(expense);
+
+    setState(() {
+      _expenses.remove(expense);
+    });
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar( SnackBar(
+        duration:const Duration(seconds: 2),
+        content: const Text('Expense removed!'),
+        action: SnackBarAction(
+          label: 'Undo',
+          onPressed: () {
+            setState(() {
+              _expenses.insert(expenseIndex, expense);
+            });
+          },
+        )
+    ));
+  }
+
   @override
   Widget build(BuildContext context) {
+    Widget mainContent = const Text('No expenses yet!');
+    if (_expenses.isNotEmpty) {
+      mainContent =
+          ExpenseList(expenses: _expenses, onRemoveExpense: _removeExpense);
+    }
     return Scaffold(
-      body: Column(
-        children:[
-          Text('Expenses'),
-        ],
-      )
-    );
+        appBar: AppBar(
+          title: const Text('Flutter Expenses'),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.add),
+              onPressed: _openAddExpenseOverlay,
+            )
+          ],
+        ),
+        body: Column(
+          children: [
+            const Text('Chart Here'),
+            Expanded(child: mainContent),
+          ],
+        ));
   }
 }

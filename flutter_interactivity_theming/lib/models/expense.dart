@@ -1,7 +1,10 @@
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
 
-const uuid = Uuid();
+final formatter = DateFormat.yMd();
 
+const uuid = Uuid();
 
 enum ExpenseType {
   food,
@@ -10,6 +13,12 @@ enum ExpenseType {
   work,
 }
 
+const expenseTypeIcons = {
+  ExpenseType.food: Icons.fastfood,
+  ExpenseType.travel: Icons.flight,
+  ExpenseType.leisure: Icons.videogame_asset,
+  ExpenseType.work: Icons.work,
+};
 
 class Expense {
   final String id;
@@ -24,4 +33,8 @@ class Expense {
     required this.date,
     required this.type,
   }) : id = uuid.v4();
+
+  String get formattedDate {
+    return formatter.format(date);
+  }
 }
