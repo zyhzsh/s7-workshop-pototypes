@@ -29,6 +29,7 @@ class _ExpensesState extends State<Expenses> {
 
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
+        useSafeArea: true,
         context: context,
         isScrollControlled: true,
         builder: (ctx) {
@@ -49,8 +50,8 @@ class _ExpensesState extends State<Expenses> {
       _expenses.remove(expense);
     });
     ScaffoldMessenger.of(context).clearSnackBars();
-    ScaffoldMessenger.of(context).showSnackBar( SnackBar(
-        duration:const Duration(seconds: 2),
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        duration: const Duration(seconds: 2),
         content: const Text('Expense removed!'),
         action: SnackBarAction(
           label: 'Undo',
@@ -59,32 +60,42 @@ class _ExpensesState extends State<Expenses> {
               _expenses.insert(expenseIndex, expense);
             });
           },
-        )
-    ));
+        )));
   }
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     Widget mainContent = const Text('No expenses yet!');
     if (_expenses.isNotEmpty) {
       mainContent =
           ExpenseList(expenses: _expenses, onRemoveExpense: _removeExpense);
     }
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Expenses'),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.add),
-              onPressed: _openAddExpenseOverlay,
+      appBar: AppBar(
+        title: const Text('Expenses'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: _openAddExpenseOverlay,
+          )
+        ],
+      ),
+      body: width < 600
+          ? Column(
+              children: [
+                Chart(expenses: _expenses),
+                Expanded(child: mainContent),
+              ],
             )
-          ],
-        ),
-        body: Column(
-          children: [
-            Chart(expenses: _expenses),
-            Expanded(child: mainContent),
-          ],
-        ));
+          : Row(
+              children: [
+                Expanded(
+                  child: Chart(expenses: _expenses),
+                ),
+                Expanded(child: mainContent),
+              ],
+            ),
+    );
   }
 }
