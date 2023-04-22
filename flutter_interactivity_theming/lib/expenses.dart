@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_interactivity_theming/widgets/chart/chart.dart';
 import 'package:flutter_interactivity_theming/widgets/expenses_list/expenses_list.dart';
 import 'package:flutter_interactivity_theming/widgets/new_expense.dart';
 
@@ -81,7 +82,7 @@ class _ExpensesState extends State<Expenses> {
         ),
         body: Column(
           children: [
-            const Text('Chart Here'),
+            Chart(expenses: _expenses),
             Expanded(child: mainContent),
           ],
         ));
