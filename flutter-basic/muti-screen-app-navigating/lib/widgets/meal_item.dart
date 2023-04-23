@@ -6,19 +6,21 @@ import 'package:transparent_image/transparent_image.dart';
 import '../models/meal.dart';
 
 class MealItem extends StatelessWidget {
-  const MealItem({Key? key, required this.meal}) : super(key: key);
+  const MealItem({Key? key, required this.meal, required this.onSelectedMeal})
+      : super(key: key);
 
   final Meal meal;
+  final void Function(BuildContext buildContext,Meal meal) onSelectedMeal;
 
-
-  String get complexityText{
-    return meal.complexity.name[0].toUpperCase()+ meal.complexity.name.substring(1);
+  String get complexityText {
+    return meal.complexity.name[0].toUpperCase() +
+        meal.complexity.name.substring(1);
   }
 
-  String get affordabilityText{
-    return meal.affordability.name[0].toUpperCase()+ meal.affordability.name.substring(1);
+  String get affordabilityText {
+    return meal.affordability.name[0].toUpperCase() +
+        meal.affordability.name.substring(1);
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,9 @@ class MealItem extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       elevation: 2,
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          onSelectedMeal(context,meal);
+        },
         child: Stack(
           children: [
             FadeInImage(
@@ -47,11 +51,10 @@ class MealItem extends StatelessWidget {
               child: Container(
                 color: Colors.black54,
                 padding:
-                const EdgeInsets.symmetric(vertical: 6, horizontal: 44),
+                    const EdgeInsets.symmetric(vertical: 6, horizontal: 44),
                 child: Column(
                   children: [
-                    Text(
-                        meal.title,
+                    Text(meal.title,
                         maxLines: 2,
                         textAlign: TextAlign.center,
                         softWrap: true,
@@ -63,16 +66,18 @@ class MealItem extends StatelessWidget {
                           color: Colors.white,
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                        )
-                    ),
+                        )),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        MealItemTrait(icon: Icons.schedule, label: meal.duration.toString()),
+                        MealItemTrait(
+                            icon: Icons.schedule,
+                            label: meal.duration.toString()),
                         const SizedBox(width: 12),
                         MealItemTrait(icon: Icons.work, label: complexityText),
                         const SizedBox(width: 12),
-                        MealItemTrait(icon: Icons.attach_money, label: complexityText),
+                        MealItemTrait(
+                            icon: Icons.attach_money, label: complexityText),
                       ],
                     )
                   ],
