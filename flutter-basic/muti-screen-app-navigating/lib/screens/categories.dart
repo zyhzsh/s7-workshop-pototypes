@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:muti_screen_app_navigating/data/dummay_data.dart';
+import 'package:muti_screen_app_navigating/models/category.dart';
+import 'package:muti_screen_app_navigating/widgets/category_grid_item.dart';
 
 class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({Key? key}) : super(key: key);
@@ -11,6 +14,7 @@ class CategoriesScreen extends StatelessWidget {
           title: const Text('Categories'),
         ),
         body: GridView(
+          padding: const EdgeInsets.all(25),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             childAspectRatio: 3 / 2,
@@ -18,10 +22,8 @@ class CategoriesScreen extends StatelessWidget {
             mainAxisSpacing: 20,
           ),
           children: [
-            Text('1',style: TextStyle(color: Colors.white),),
-            Text('1',style: TextStyle(color: Colors.white),),
-            Text('1',style: TextStyle(color: Colors.white),),
-            Text('1',style: TextStyle(color: Colors.white),),
+            for (final category in availableCategories)
+              CategoryGridItem(category: category)
           ],
         ));
   }
