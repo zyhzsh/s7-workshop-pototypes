@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:muti_screen_app_navigating/widgets/meal_item.dart';
 import '../models/meal.dart';
 
 class MealsScreen extends StatelessWidget {
@@ -13,7 +14,7 @@ class MealsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget content = ListView.builder(
       itemBuilder: (context, index) {
-        return Text(meals[index].title);
+        return MealItem(meal: meals[index]);
       },
       itemCount: meals.length,
     );
@@ -41,7 +42,7 @@ class MealsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Meals'),
+        title: Text(title),
       ),
       body: content,
     );
