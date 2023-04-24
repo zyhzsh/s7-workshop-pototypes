@@ -1,23 +1,34 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:muti_screen_app_navigating/models/meal.dart';
+import 'package:muti_screen_app_navigating/providers/favorites_provider.dart';
 
-class MealDetailsScreen extends StatelessWidget {
-  const MealDetailsScreen({Key? key, required this.meal, required this.onToggleFavorite}) : super(key: key);
+class MealDetailsScreen extends ConsumerWidget {
+  const MealDetailsScreen({Key? key, required this.meal}) : super(key: key);
 
   final Meal meal;
-  final void Function(Meal meal) onToggleFavorite;
-
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
         appBar: AppBar(
           title: Text(meal.title),
           actions: [
             IconButton(
               onPressed: () {
-                onToggleFavorite(meal);
+                final wasAdded = ref
+                    .read(favoriteProvider.notifier)
+                    .toggleMealFavoriteStatus(meal);
+                ScaffoldMessenger.of(context).clearSnackBars();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(wasAdded
+                        ? 'Meal added as a favorite.'
+                        : 'Meal removed.'),
+                    //duration: const Duration(seconds: 2),
+                  ),
+                );
               },
               icon: const Icon(Icons.favorite),
             ),
