@@ -18,22 +18,29 @@ class MealDetailsScreen extends ConsumerWidget {
           title: Text(meal.title),
           actions: [
             IconButton(
-              onPressed: () {
-                final wasAdded = ref
-                    .read(favoriteProvider.notifier)
-                    .toggleMealFavoriteStatus(meal);
-                ScaffoldMessenger.of(context).clearSnackBars();
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(wasAdded
-                        ? 'Meal added as a favorite.'
-                        : 'Meal removed.'),
-                    //duration: const Duration(seconds: 2),
+                onPressed: () {
+                  final wasAdded = ref
+                      .read(favoriteProvider.notifier)
+                      .toggleMealFavoriteStatus(meal);
+                  ScaffoldMessenger.of(context).clearSnackBars();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(wasAdded
+                          ? 'Meal added as a favorite.'
+                          : 'Meal removed.'),
+                      //duration: const Duration(seconds: 2),
+                    ),
+                  );
+                },
+                icon: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 300),
+                  transitionBuilder: (child, animation) => ScaleTransition(
+                    scale: Tween(begin: 0.8,end: 1.0).animate(animation),
+                    child: child,
                   ),
-                );
-              },
-              icon:  Icon(isfavorite?Icons.favorite:Icons.favorite_border),
-            ),
+                  child:
+                      Icon(isfavorite ? Icons.favorite : Icons.favorite_border,key: ValueKey(isfavorite),),
+                )),
           ],
         ),
         body: SingleChildScrollView(
