@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:muti_screen_app_navigating/screens/tabs.dart';
 
 final theme = ThemeData(
@@ -28,8 +26,9 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: theme,
-      home: TabsScreen(),
+      home: const TabsScreen(),
     );
   }
 }
