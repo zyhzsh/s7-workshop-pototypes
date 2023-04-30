@@ -1,11 +1,14 @@
+import 'dart:io';
+
 import 'package:nanoid/nanoid.dart';
 
-
-class Place{
+class Place {
   final String id;
   final String title;
+  final File image;
 
   Place({
     required this.title,
-  }): id = nanoid(10);
+    required this.image,
+  }) : id = nanoid(10);
 }
