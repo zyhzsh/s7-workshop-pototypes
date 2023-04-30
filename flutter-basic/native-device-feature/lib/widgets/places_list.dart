@@ -38,6 +38,12 @@ class PlacesList extends StatelessWidget {
               );
             }));
           },
+          subtitle: Text(
+            place.location.address,
+            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                  color: Theme.of(context).colorScheme.onBackground,
+                ),
+          ),
           title: Text(
             place.title,
             style: Theme.of(context).textTheme.titleMedium!.copyWith(
