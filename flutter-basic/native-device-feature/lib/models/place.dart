@@ -27,5 +27,6 @@ class Place {
     required this.title,
     required this.image,
     required this.location,
-  }) : id = nanoid(10);
+    String? id,
+  }) : id = id ?? nanoid(10);
 }
