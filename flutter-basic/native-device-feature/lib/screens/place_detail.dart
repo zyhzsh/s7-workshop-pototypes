@@ -69,7 +69,6 @@ class PlaceDetailScreen extends StatelessWidget {
                         end: Alignment.topCenter,
                       ),
                       color: Theme.of(context).colorScheme.background,
-                      borderRadius: BorderRadius.circular(15),
                     ),
                     child: Text(place.location.address,
                         textAlign: TextAlign.center,
